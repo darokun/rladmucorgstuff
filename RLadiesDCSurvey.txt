@@ -1,0 +1,96 @@
+[taken from https://kellyo.typeform.com/to/inkRZz]
+
+1. What types of events are you most interested in attending?
+[choose as many as you like]
+a. Introductory Level R Workshops
+b. Intermediate/Advanced Level R Workshops
+c. Social/Networking Events
+d. R package or Feature Specific Tutorials
+e. R Talks on Academic Research Projects
+f. R Talks on Business/Enterprise Data Science
+g. Open Format Work Sessions
+h. Lightning Talks on R Topics
+i. Mini-Hackatons
+j. R Project Collaboration
+k. Data Science Competitions
+l. Other
+
+2. Event Location Planning (1/3)
+How important is Metro accessibility to you?
+|=====================|
+0          5         10
+Not at all	Super Important
+	No Preference
+
+3. Event location Planning (2/3)
+How important is car parking to you?
+|=====================|
+0          5         10
+Not at all	Super Important
+	No Preference
+
+4. Event location Planning (3/3)
+How important is bike storage/parking to you?
+|=====================|
+0          5         10
+Not at all	Super Important
+	No Preference
+
+5. Do you have any other event accessibility concerns that we should take into consideration?
+(open answer)
+
+6. Which days/times work best for you?
+[choose as many as you like]
+a. Monday nights
+b. Tuesday nights
+c. Wednesday nights
+d. Thursday nights
+e. Friday nights
+f. Saturday mornings
+g. Saturday afternoons
+h. Sunday mornings
+i. Sunday afternoons
+j. Doesn't matter
+k. Other
+
+7. How would you describe your level of experience in working with R?
+a. None (so far...)
+b. Just getting started
+c. Know some basics
+d. Could use a refresher on the basics
+e. Actively learning intermediate level
+f. Actively learning advanced level
+g. Other
+
+8. Which (if any) of these topics interest you?
+[choose as many as you like]
+a. Data Science
+b. Big Data
+c. Predictive Analytics
+d. Business Intelligence
+e. Data Wrangling
+f. Data Visualization
+g. Academic Research
+h. Data Journalism
+i. Data Literacy
+j. Cloud Computing
+k. Machine Learning
+l. R Shiny Apps
+m. R + Python
+n. R + Spark
+o. Transitioning to R from...
+p. Other
+
+9. Bonus questions:
+- Do you have interest in giving a talk?
+- Hosting or sponsoring an event?
+- Contributing other thoughts?
+
+a. Tell us about it here:
+(open answer)
+
+b. Add your name here - (only if you'd like to)
+(open answer)
+
+c. Leave us your email address - (only if you'd like to)
+(open answer)
