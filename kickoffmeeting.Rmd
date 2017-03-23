@@ -6,7 +6,7 @@ output: html_document
 ---
 
 # The very first R-Ladies Munich meeting!
-![R-Ladies Munich Co-founders. From left to right: Dan, Pamela and Daloha. Maggie could not make it :( ](kickoffmeeting.jpg)
+![R-Ladies Munich Co-founders. From left to right: Dan, Pamela and Daloha. Maggie could not make it :( ](images/kickoffmeeting.jpg)
 
 ### General info
 
