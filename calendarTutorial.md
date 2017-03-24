@@ -1,9 +1,5 @@
----
-title: 'Tutorial: calendar and rladies.org account'
-author: "Daloha Rodr&iacute;guez-Molina"
-date: "March 24, 2017"
-output: html_document
----
+# Tutorial: Google Calendar + ladies.org email account + Apple's Calendar app
+by Daloha Rodr&iacute;guez-Molina - March 24, 2017
 
 ##### This is a short tutorial on how to integrate Google Calendar with our ladies.org email account, and how to further connect it and manage it from the Calendar app on mac.
 
