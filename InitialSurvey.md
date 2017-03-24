@@ -1,11 +1,5 @@
----
-title: "Initial Survey"
-author: "Daloha Rodr&iacute;guez-Molina"
-date: "March 21, 2017"
-output:
-  pdf_document: default
-  html_document: default
----
+# Initial Survey for the R-Ladies Munich meetup group
+by Daloha Rodr&iacute;guez-Molina - March 21, 2017
 
 # R-Ladies Munich Initial Survey
 #### Taken from [here](https://kellyo.typeform.com/to/inkRZz) https://kellyo.typeform.com/to/inkRZz

@@ -1,9 +1,5 @@
----
-title: "To do list"
-author: "Daloha Rodr&iacute;guez-Molina"
-date: "March 19, 2017"
-output: html_document
----
+# R-Ladies to-do list
+by Daloha Rodr&iacute;guez-Molina - March 19, 2017
 
 ## R-Ladies Munich
 

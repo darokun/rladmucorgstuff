@@ -1,9 +1,6 @@
----
-title: "Meeting 21.03.2017"
-author: "Daloha Rodr&iacute;guez-Molina"
-date: "March 23, 2017"
-output: html_document
----
+# R-Ladies Munich kickoff meeting (21.03.2017)
+by Daloha Rodr&iacute;guez-Molina - March 23, 2017
+
 
 # The very first R-Ladies Munich meeting!
 ![R-Ladies Munich Co-founders. From left to right: Dan, Pamela and Daloha. Maggie could not make it :( ](images/kickoffmeeting.jpg)
