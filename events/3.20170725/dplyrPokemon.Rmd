@@ -1,0 +1,213 @@
+---
+title: "dplyr for exploring Pokemon data"
+output: html_notebook
+---
+
+![](https://media.giphy.com/media/Bim8PTxyBurfi/giphy.gif)
+
+First of all, we need to install some packages. Remember that `dplyr` lives in the `tidyverse`:
+``` {r eval = FALSE, error = FALSE}
+install.packages("tidyverse") 
+install.packages("knitr")
+install.packages("scales")
+install.packages("ggthemes")
+install.packages("highcharter")
+```
+
+And since this is a Pokemon-based exercise, let's also install some Pokemon-related color palettes:
+
+``` {r eval = FALSE, error = FALSE}
+install.packages('palettetown')
+```
+
+Let's load all packages:
+``` {r}
+library(tidyverse)
+library(knitr)
+library(scales)
+library(ggthemes)
+library(palettetown)
+library(highcharter, quietly = TRUE)
+library(rvest)
+```
+
+Now, let's load that freely available [Pokemon dataset](https://www.kaggle.com/abcsds/pokemon)!
+```{r}
+data_file <- 'https://assets.datacamp.com/production/course_1815/datasets/Pokemon.csv'
+data <- read_csv(data_file)
+```
+
+And some more things happening under da hood:
+``` {r}
+r_90_d <- theme(axis.text.x = element_text(angle = 90, hjust = 1))
+caption <- "RLadies Munich"
+my_theme <- theme_few() 
+```
+
+We also need some Pokemon- and RLadies- related colors. Rattata seems to have a nice color scheme similar to both. We'll use the `%>%` (pipe) operator from the `magritte` package (don't worry. The `tidyverse` already includes it):
+``` {r}
+cp_rattata <- "Rattata" %>% ichooseyou(spread = 13)
+cp <- c(cp_rattata, cp_rattata)
+```
+
+We read that as "Rattata! I choose you!" (well, only thirteen distinct colors, hence `spread = 13`, but you get the point).
+
+If we're not trying to choose a color palette, we read the `%>%` operator as 'then', but more on that below.
+
+Let's now take a look at how our dataset looks:
+```{r}
+head(data)
+```
+
+As the [dataset's website](https://www.kaggle.com/abcsds/pokemon) explains, this a dataset containing 13 variables:
+
+* **Number**: ID for each pokemon
+* **Name**: Name of each pokemon
+* **Type1**: Each pokemon has a type, this determines weakness/resistance to attacks
+* **Type2**: Some pokemon are dual type and have 2
+* **Total**: sum of all stats that come after this, a general guide to how strong a pokemon is
+* **HitPoints**: hit points, or health, defines how much damage a pokemon can withstand before fainting
+* **Attack**: the base modifier for normal attacks (eg. Scratch, Punch)
+* **Defense**: the base damage resistance against normal attacks
+* **SpecialAttack**: special attack, the base modifier for special attacks (e.g. fire blast, bubble beam)
+* **SpecialDefense**: the base damage resistance against special attacks
+* **Speed**: determines which pokemon attacks first each round
+* **Generation**: the number of the generation (as an integer) each pokemon belongs to.
+* **Legendary**: whether the pokemon is legendary or not, as a boolean value.
+
+---
+
+## Verbs for columns: `select()` and `mutate()`
+### Selecting columns using `select()`
+The first `dplyr` verb we'll use is `select()`. It allows us to select only columns that we're interested in, without creating subsets of the dataset or losing information. Let's suppose that we want to visualize only the `Number` of the Pokemon, its `Name` and whether or not it is `Legendary`:
+``` {r}
+data %>%
+  select(Number, Name, Legendary)
+```
+
+The verb `select()` also allows to choose columns by number:
+``` {r}
+data %>%
+  select(1:2, 13)
+```
+
+
+![](https://media.tenor.com/images/c73d6ba7d5db72b5f12e51e4e7e1d455/tenor.gif)
+
+
+### Mutating columns using `mutate()`
+There is one column called `Total` which is described as "sum of all stats that come after this, a general guide to how strong a pokemon is." Let's verify this information summing up all the stats to `mutate()` this information into a new variable called `Total2`:
+```{r}
+data %>%
+  mutate(Total2 = HitPoints + Attack + Defense + SpecialAttack + SpecialDefense + Speed)
+```
+
+As we can see, `mutate()` makes it easy to work with the information contained in variables in order to create a completely new variable.
+
+---
+
+## Verbs for rows: `filter()` and `arrange()`
+### Filtering rows with `filter()`
+Which Pokemons are water type? Which are fire type? We can find out by using `filter()`.
+
+```{r}
+data %>%
+  filter(Type1 == "Water")
+```
+
+```{r}
+data %>%
+  filter(Type1 == "Fire")
+```
+
+
+### Arranging information using `arrange()`
+When we used `select()` to see the Pokemon `Number`, its `Name` and whether or not they are `Legendary`, we could only see `FALSE` results in the beginning. How about we re-`arrange()` the information to see those which are `Legendary` first?
+
+``` {r}
+data %>%
+  select(Number, Name, Legendary) %>%
+  arrange()
+```
+
+Wait, we wanted the `TRUE` values in `Legendary` to come first. By default, `arrange()` shows the information in alphabetical order a-z, or number order from lowest to highest. When showing booleans, it relies on `FALSE = 0` and `TRUE = 1`, which means that shows `FALSE` first by default. If we want to reverse this and show results in descending order, we have to use `desc()`. So, no problem! We can ask `arrange()` to show results in descending order by including `desc()` on `Legendary`:
+
+```{r}
+data %>%
+  select(Number, Name, Legendary) %>%
+  arrange(desc(Legendary))
+```
+
+## Other verbs: `summarise()` and `group_by()`
+There are at least two other verbs in `dplyr` which are quite useful. If we want to get summary statistics, we can use `summarise()` + the summarizing function we need. Plus, sometimes we need to analyze data by groups. This is where `group_by()` comes into play. Let's use these two verbs at once to get the `mean()` and standard deviation `sd()` of the `Total` by `Type1` of Pokemon, as well as how many there are by using `n()`, and then using `arrange()` to see which types are on the first positions:
+
+``` {r}
+data %>%
+  group_by(Type1) %>%
+  summarise(n = n(),
+            avg_total = mean(Total),
+            sd_total = sd(Total)) %>%
+  arrange(desc(avg_total))
+```
+
+# Dragon type is the best!
+
+![](https://media.giphy.com/media/Hjm9xfaQyiBCE/giphy.gif)
+
+### How many Pokemons are per type?
+Let's use some `dplyr` functions and `ggplot` to create a barchart of Pokemon types!
+
+```{r}
+data %>%
+    count(Type1) %>%
+    mutate(Type1 = forcats::fct_reorder(Type1, n, .desc = FALSE)) %>%
+    ggplot(aes(x = Type1, y = n)) + 
+      geom_bar(stat = 'identity', aes(fill = Type1)) + 
+      my_theme + 
+      coord_flip() + 
+      scale_fill_manual(values = cp, guide = FALSE)
+  
+```
+
+
+# Exercises
+![](https://68.media.tumblr.com/d18db33deb21af47cd0f9b19ef6f98ba/tumblr_n44uk8kYOy1tthhlho1_500.gif)
+
+1. Use the `filter` function to select only the water Pokemons and save it in an object called `water`.
+2. Do the same with the fire Pokemons and save it in an object called `fire`.
+3. Which type is more powerful? Calculate the average `Total` score of each type of Pokemon. Use `na.rm = TRUE`. Do not use the `%>%` operator.
+4. Try to get to the same result in one pipeline by using `group_by`, `filter` and `summarize`.
+
+
+# Solutions
+1. Use the `filter` function to select only the water Pokemons and save it in an object called `water`.
+``` {r echo = TRUE}
+water <- data %>% 
+  filter(Type1 == "Water")
+
+water
+```
+
+2. Do the same with the fire Pokemons and save it in an object called `fire`.
+``` {r}
+fire <- data %>% 
+  filter(Type1 == "Fire")
+fire
+```
+
+3. Which type is more powerful? Calculate the average `Total` score of each type of Pokemon. Use `na.rm = TRUE`. Do not use the `%>%` operator.
+``` {r}
+mean(water$Total, na.rm = TRUE)
+mean(fire$Total, na.rm = TRUE)
+```
+
+4. Try to get to the same result in one pipeline by using `filter`, `group_by` and `summarize`.
+```{r}
+data %>%
+  filter(Type1 == "Water" | Type1 == "Fire") %>%
+  group_by(Type1) %>%
+  summarise(mean(Total, na.rm = TRUE))
+```
+
+## Congrats! You've learned dplyr!
+![](https://media.giphy.com/media/yhfTY8JL1wIAE/giphy.gif)
