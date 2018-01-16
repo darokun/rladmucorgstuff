@@ -1,0 +1,39 @@
+---
+title: "RLadiesExercise"
+author: "Daloha Rodr&iacute;guez-Molina"
+date: "April 26, 2017"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+# Edgar Anderson's Iris Data
+
+#### Description
+This famous (Fisher's or Anderson's) iris data set gives the measurements in centimeters of the variables sepal length and width and petal length and width, respectively, for 50 flowers from each of 3 species of iris. The species are *Iris setosa, versicolor,* and *virginica*.
+
+##### See Also
+[matplot](https://stat.ethz.ch/R-manual/R-devel/library/graphics/html/matplot.html) some examples of which use iris.
+
+##### Examples
+```{r}
+dni3 <- dimnames(iris3)
+ii <- data.frame(matrix(aperm(iris3, c(1,3,2)), ncol = 4,
+                        dimnames = list(NULL, sub(" L.",".Length",
+                                        sub(" W.",".Width", dni3[[2]])))),
+    Species = gl(3, 50, labels = sub("S", "s", sub("V", "v", dni3[[3]]))))
+all.equal(ii, iris) # TRUE
+```
+
+### Now I want to plot something:
+```{r echo=FALSE}
+plot(iris$Petal.Length, iris$Petal.Width, pch=21, bg=c("red","green3","blue")[unclass(iris$Species)], main="Edgar Anderson's Iris Data")
+```
+
+#### And this is a table:
+
+**Name** | **Country of origin** | **email**
+---------|-----------------------|----------
+Daloha | Venezuela | daloha@rladies.org
+Maggie | Hong Kong | maggie@rladies.org
+Pamela | Mexico | pamela@rladies.org
